@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => [config('app.url'), 'https://minigames.scandefi.test'],
 
     'allowed_origins_patterns' => [],
 

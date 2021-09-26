@@ -51,6 +51,6 @@ class UserController extends Controller
       $user = User::whereWallet($wallet)->first();
       $minigame = Minigame::whereSlug($slug)->first();
 
-      return response()->json(['user' => $user, 'minigame' => $minigame, 'lives' => 9999]);
+      return response()->json(['user' => $wallet, 'minigame' => $minigame, 'lives' => 9999]);
     }
 }
