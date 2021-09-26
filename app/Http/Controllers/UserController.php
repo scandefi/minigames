@@ -81,6 +81,7 @@ class UserController extends Controller
         'user' => $wallet,
         'minigame' => $slug,
         'ranking' => $ranking,
+        'score' => $ranking_total[$wallet][0]['score'],
         'total' => $total,
       ]);
     }
