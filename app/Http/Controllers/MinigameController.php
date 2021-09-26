@@ -11,6 +11,8 @@ class MinigameController extends Controller
     public function play($slug)
     {
         $minigame = Minigame::whereSlug($slug)->first();
+        if(!$minigame) abort(404);
+
         return view('minigames.play')->withMinigame($minigame);
     }
 
@@ -19,15 +21,18 @@ class MinigameController extends Controller
       $user = User::whereWallet($wallet)->first();
       $minigame = Minigame::whereSlug($slug)->first();
 
+      if(!$user || !$minigame) return response()->json(['success' => false, 'message' => 'Model not found']);
+
       return response()->json(['user' => $wallet, 'minigame' => $slug, 'lives' => 99999]);
     }
 
     public function ranking($slug)
     {
       $minigame = Minigame::whereSlug($slug)->first();
+
       if(!$minigame) return response()->json(['success' => false, 'message' => 'Model not found']);
       
-      $ranking_total = Score::whereMinigameId($minigame->id)->orderBy('score', 'desc')->get()->groupBy('wallet')->take(30);
+      $ranking_total = Score::whereMinigameId($minigame->id)->orderBy('score', 'desc')->take(30)->get()->groupBy('wallet');
       
       $ranking = collect();
       $index = 1;

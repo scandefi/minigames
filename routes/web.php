@@ -27,6 +27,7 @@ Route::group(['prefix' => 'api'], function(){
     Route::post('users/logout', [Controllers\UserController::class, 'logout']);
     
     Route::get('users/{wallet}/minigames/{slug}/lives', [Controllers\UserController::class, 'lives']);
+    Route::get('users/{wallet}/minigames/{slug}/ranking', [Controllers\UserController::class, 'ranking']);
     
     
     // MINIGAMES
