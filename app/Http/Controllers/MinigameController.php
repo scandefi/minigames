@@ -29,10 +29,10 @@ class MinigameController extends Controller
     public function ranking($slug)
     {
       $minigame = Minigame::whereSlug($slug)->first();
-
+      
       if(!$minigame) return response()->json(['success' => false, 'message' => 'Model not found']);
       
-      $ranking_total = Score::whereMinigameId($minigame->id)->orderBy('score', 'desc')->take(30)->get()->groupBy('wallet');
+      $ranking_total = Score::whereMinigameId($minigame->id)->orderBy('score', 'desc')->get()->groupBy('wallet')->take(30);
       
       $ranking = collect();
       $index = 1;
