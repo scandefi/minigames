@@ -10,7 +10,7 @@ class MinigameController extends Controller
     public function play($slug)
     {
         $minigame = Minigame::whereSlug($slug)->first();
-        return view('minigames.'.$slug)->withMinigame($minigame);
+        return view('minigames.play')->withMinigame($minigame);
     }
 
     public function lives($wallet, $slug)

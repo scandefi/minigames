@@ -1,3 +1,7 @@
+@php
+    $_SESSION["MINIGAME"] = $minigame->slug;
+@endphp
+
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
