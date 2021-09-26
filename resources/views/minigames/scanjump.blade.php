@@ -61,7 +61,7 @@
     <script src="{{url('minigames/'.$minigame->slug.'/Build/UnityLoader.js')}}"></script>
     <script src="{{url('minigames/'.$minigame->slug.'/js/app.js')}}"></script>
     <script>
-      window.App.unityInstance = UnityLoader.instantiate("unityContainer", "minigames/{{$minigame->slug}}/Build/Build.json", {onProgress: UnityProgress});
+      window.App.unityInstance = UnityLoader.instantiate("unityContainer", "../minigames/{{$minigame->slug}}/Build/Build.json", {onProgress: UnityProgress});
       window.App.unityInstance.compatibilityCheck=function(e,t,r){t();};
     </script>
   </head>
