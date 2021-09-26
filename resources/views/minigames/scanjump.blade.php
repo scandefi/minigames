@@ -14,13 +14,13 @@
     <meta name="msapplication-navbutton-color" content="#000000">
     <meta name="apple-mobile-web-app-status-bar-style" content="#000000">
 
-    <meta name="msapplication-TileImage" content="storage/minigames/{{$minigame->slug}}/images/favicon/144x144.png">
+    <meta name="msapplication-TileImage" content="minigames/{{$minigame->slug}}/images/favicon/144x144.png">
     <meta name="apple-mobile-web-app-title" content="{{$minigame->name}} | {{config('app.name')}}">
 
-    <link rel="icon" type="image/png" sizes="16x16" href="storage/minigames/{{$minigame->slug}}/images/favicon/16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="storage/minigames/{{$minigame->slug}}/images/favicon/32x32.png">
-    <link rel="icon" type="image/png" sizes="64x64" href="storage/minigames/{{$minigame->slug}}/images/favicon/64x64.png">
-    <link rel="icon" type="image/png" sizes="128x128" href="storage/minigames/{{$minigame->slug}}/images/favicon/128x128.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="minigames/{{$minigame->slug}}/images/favicon/16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="minigames/{{$minigame->slug}}/images/favicon/32x32.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="minigames/{{$minigame->slug}}/images/favicon/64x64.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="minigames/{{$minigame->slug}}/images/favicon/128x128.png">
 
     <title>{{$minigame->name}} | {{config('app.name')}}</title>
     <meta name="title" content="{{$minigame->name}} | {{config('app.name')}}">
@@ -36,8 +36,8 @@
     <meta property="og:url" content="{{url($minigame->slug)}}">
     <meta property="og:title" content="{{$minigame->name}} | {{config('app.name')}}">
     <meta property="og:description" content="{{config('app.description')}}">
-    <meta property="og:image:secure_url" content="storage/minigames/{{$minigame->slug}}/images/rrss/203x136.jpg">
-    <meta property="og:image" content="storage/minigames/{{$minigame->slug}}/images/rrss/203x136.jpg">
+    <meta property="og:image:secure_url" content="minigames/{{$minigame->slug}}/images/rrss/203x136.jpg">
+    <meta property="og:image" content="minigames/{{$minigame->slug}}/images/rrss/203x136.jpg">
     <meta property="og:image:alt" content="{{$minigame->name}} | {{config('app.name')}}">
 
     <!-- Twitter -->
@@ -45,9 +45,9 @@
     <meta property="twitter:url" content="{{url($minigame->slug)}}">
     <meta property="twitter:title" content="{{$minigame->name}} | {{config('app.name')}}">
     <meta property="twitter:description" content="{{config('app.description')}}">
-    <meta property="twitter:image" content="storage/minigames/{{$minigame->slug}}/images/rrss/203x136.jpg">
+    <meta property="twitter:image" content="minigames/{{$minigame->slug}}/images/rrss/203x136.jpg">
 
-    <link rel="stylesheet" href="storage/minigames/{{$minigame->slug}}/TemplateData/style.css">
+    <link rel="stylesheet" href="minigames/{{$minigame->slug}}/TemplateData/style.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/web3@1.2.11/dist/web3.min.js"></script>
@@ -57,11 +57,11 @@
     <script type="text/javascript" src="https://unpkg.com/fortmatic@2.0.6/dist/fortmatic.js"></script>
     <script type="text/javascript" src="https://unpkg.com/ethers@4.0.16/dist/ethers.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="storage/minigames/{{$minigame->slug}}/TemplateData/UnityProgress.js"></script>
-    <script src="storage/minigames/{{$minigame->slug}}/Build/UnityLoader.js"></script>
-    <script src="storage/minigames/{{$minigame->slug}}/js/app.js"></script>
+    <script src="minigames/{{$minigame->slug}}/TemplateData/UnityProgress.js"></script>
+    <script src="minigames/{{$minigame->slug}}/Build/UnityLoader.js"></script>
+    <script src="minigames/{{$minigame->slug}}/js/app.js"></script>
     <script>
-      window.App.unityInstance = UnityLoader.instantiate("unityContainer", "storage/minigames/{{$minigame->slug}}/Build/Build.json", {onProgress: UnityProgress});
+      window.App.unityInstance = UnityLoader.instantiate("unityContainer", "minigames/{{$minigame->slug}}/Build/Build.json", {onProgress: UnityProgress});
       window.App.unityInstance.compatibilityCheck=function(e,t,r){t();};
     </script>
   </head>
