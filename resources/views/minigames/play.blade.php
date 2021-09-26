@@ -61,9 +61,9 @@
     <script type="text/javascript" src="https://unpkg.com/fortmatic@2.0.6/dist/fortmatic.js"></script>
     <script type="text/javascript" src="https://unpkg.com/ethers@4.0.16/dist/ethers.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="/storage/minigames/{{$minigame->slug}}/TemplateData/UnityProgress.js"></script>
-    <script src="/storage/minigames/{{$minigame->slug}}/Build/UnityLoader.js"></script>
-    <script src="/storage/minigames/{{$minigame->slug}}/js/app.js"></script>
+    <script src="/storage/minigames/{{$minigame->slug}}/TemplateData/UnityProgress.js?t={{time()}}"></script>
+    <script src="/storage/minigames/{{$minigame->slug}}/Build/UnityLoader.js?t={{time()}}"></script>
+    <script src="/storage/minigames/{{$minigame->slug}}/js/app.js?t={{time()}}"></script>
     <script>
       window.App.unityInstance = UnityLoader.instantiate("unityContainer", "/storage/minigames/{{$minigame->slug}}/Build/Build.json", {onProgress: UnityProgress});
       window.App.unityInstance.compatibilityCheck=function(e,t,r){t();};
