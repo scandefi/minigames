@@ -35,4 +35,5 @@ Route::group(['prefix' => 'api'], function(){
     
     // SCORES
     Route::post('users/{wallet}/minigames/{slug}/score', [Controllers\ScoreController::class, 'store']);
+    Route::get('users/{wallet}/minigames/{slug}/highscore', [Controllers\ScoreController::class, 'highscore']);
 });
