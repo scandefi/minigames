@@ -77,8 +77,8 @@ class ScoreController extends Controller
 
       if(!$user || !$minigame) return response()->json(['success' => false, 'message' => 'Model not found']);
 
-      $start_game = Carbon::createFromFormat('m/d/Y h:i:s A', $request->start_game)->toDateTimeString();
-      $end_game = Carbon::createFromFormat('m/d/Y h:i:s A', $request->end_game)->toDateTimeString();
+      $start_game = Carbon::createFromFormat('m/d/Y h:i:s A', $request->start_game);
+      $end_game = Carbon::createFromFormat('m/d/Y h:i:s A', $request->end_game);
       $duration = $end_game->diffForHumans($start_game, true, true, 6);
 
       $round = $minigame->activeRound();
@@ -90,8 +90,8 @@ class ScoreController extends Controller
         'round_id' => $round->id,
         'round_name' => $round->name,
         'wallet' => $wallet,
-        'start_game' => $start_game,
-        'end_game' => $end_game,
+        'start_game' => $start_game->toDateTimeString(),
+        'end_game' => $end_game->toDateTimeString(),
         'duration' => $duration,
         'minigame_name' => $minigame->name,
         'minigame_slug' => $slug,
