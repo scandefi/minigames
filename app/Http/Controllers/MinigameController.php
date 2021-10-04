@@ -91,6 +91,8 @@ class MinigameController extends Controller
         $minigame = Minigame::whereSlug($slug)->first();
         $round = $minigame->activeRound();
 
+        if(!$minigame || !$round) return response()->json(['success' => false, 'message' => 'Model not found']);
+
         return $this->roundRanking($slug, $round->name);
     }
 
@@ -99,6 +101,67 @@ class MinigameController extends Controller
         $minigame = Minigame::whereSlug($slug)->first();
         $round = $minigame->previousRound();
 
+        if(!$minigame || !$round) return response()->json(['success' => false, 'message' => 'Model not found']);
+
         return $this->roundRanking($slug, $round->name);
+    }
+
+    public function rounds($slug)
+    {
+      $minigame = Minigame::whereSlug($slug)->first();
+
+      if(!$minigame) return response()->json(['success' => false, 'message' => 'Model not found']);
+
+      return response()->json([
+        'success' => true,
+        'message' => 'Rounds of ' . $minigame->name . ' minigame',
+        'mnigame' => $slug,
+        'rounds' => $minigame->rounds,
+      ]);
+    }
+
+    public function activeRound($slug)
+    {
+      $minigame = Minigame::whereSlug($slug)->first();
+      $round = $minigame->activeRound();
+
+      if(!$minigame || !$round) return response()->json(['success' => false, 'message' => 'Model not found']);
+
+      return response()->json([
+        'success' => true,
+        'message' => 'Active round of ' . $minigame->name . ' minigame',
+        'mnigame' => $slug,
+        'round' => $round,
+      ]);
+    }
+
+    public function previousRound($slug)
+    {
+      $minigame = Minigame::whereSlug($slug)->first();
+      $round = $minigame->previousRound();
+
+      if(!$minigame || !$round) return response()->json(['success' => false, 'message' => 'Model not found']);
+
+      return response()->json([
+        'success' => true,
+        'message' => 'Previous round of ' . $minigame->name . ' minigame',
+        'mnigame' => $slug,
+        'round' => $round,
+      ]);
+    }
+
+    public function nextRound($slug)
+    {
+      $minigame = Minigame::whereSlug($slug)->first();
+      $round = $minigame->nextRound();
+
+      if(!$minigame || !$round) return response()->json(['success' => false, 'message' => 'Model not found']);
+
+      return response()->json([
+        'success' => true,
+        'message' => 'Next round of ' . $minigame->name . ' minigame',
+        'mnigame' => $slug,
+        'round' => $round,
+      ]);
     }
 }

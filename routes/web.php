@@ -39,6 +39,11 @@ Route::group(['prefix' => 'api'], function(){
     Route::get('minigames/{slug}/ranking/active', [Controllers\MinigameController::class, 'activeRoundRanking']);
     Route::get('minigames/{slug}/ranking/previous', [Controllers\MinigameController::class, 'previousRoundRanking']);
     
+    Route::get('minigames/{slug}/rounds', [Controllers\MinigameController::class, 'rounds']);
+    Route::get('minigames/{slug}/round/active', [Controllers\MinigameController::class, 'activeRound']);
+    Route::get('minigames/{slug}/round/next', [Controllers\MinigameController::class, 'nextRound']);
+    Route::get('minigames/{slug}/round/previous', [Controllers\MinigameController::class, 'previousRound']);
+    
     
     // SCORES
     Route::post('users/{wallet}/minigames/{slug}/score', [Controllers\ScoreController::class, 'store']);
