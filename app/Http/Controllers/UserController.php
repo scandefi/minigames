@@ -85,4 +85,35 @@ class UserController extends Controller
         'total' => $total,
       ]);
     }
+
+    public function roundRanking($wallet, $slug, $round_name)
+    {
+      $user = User::whereWallet($wallet)->first();
+      $minigame = Minigame::whereSlug($slug)->first();
+      $round = $minigame->rounds()->whereName($round_name)->first();
+
+      if(!$user || !$minigame || !$round) return response()->json(['success' => false, 'message' => 'Model not found']);
+
+      $ranking_total = Score::whereMinigameId($minigame->id)->whereRoundName($round_name)->orderBy('score', 'desc')->get()->groupBy('wallet');
+      
+      $total = $ranking_total->count();
+      $wallets = collect(array_keys($ranking_total->toArray()));
+
+      $ranking = $wallets->search(function($wallet) use($user) {
+        return $wallet === $user->wallet;
+      });
+
+      $ranking = $ranking + 1;
+
+      return response()->json([
+        'success' => true,
+        'message' => 'User ' . $wallet . ' ranking for ' . $minigame->name . ' minigame',
+        'user' => $wallet,
+        'minigame' => $slug,
+        'round' => $round_name,
+        'ranking' => $ranking,
+        'score' => $ranking_total[$wallet][0]['score'],
+        'total' => $total,
+      ]);
+    }
 }

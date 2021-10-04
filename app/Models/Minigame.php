@@ -20,4 +20,24 @@ class Minigame extends Model
     {
         return $this->hasMany(Score::class);
     }
+
+    public function rounds()
+    {
+        return $this->hasMany(Round::class);
+    }
+
+    public function activeRound()
+    {
+        return $this->rounds()->whereStatus('active')->first();
+    }
+
+    public function nextRound()
+    {
+        return $this->rounds()->whereStatus('waiting')->first();
+    }
+
+    public function previousRound()
+    {
+        return $this->rounds()->whereStatus('ended')->latest()->first();
+    }
 }

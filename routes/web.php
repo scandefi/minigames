@@ -28,10 +28,14 @@ Route::group(['prefix' => 'api'], function(){
     
     Route::get('users/{wallet}/minigames/{slug}/lives', [Controllers\UserController::class, 'lives']);
     Route::get('users/{wallet}/minigames/{slug}/ranking', [Controllers\UserController::class, 'ranking']);
+    Route::get('users/{wallet}/minigames/{slug}/round/{round_name}/ranking', [Controllers\UserController::class, 'roundRanking']);
     
     
     // MINIGAMES
     Route::get('minigames/{slug}/ranking', [Controllers\MinigameController::class, 'ranking']);
+    Route::get('minigames/{slug}/round/{round_name}/ranking', [Controllers\MinigameController::class, 'roundRanking']);
+    Route::get('minigames/{slug}/ranking/active', [Controllers\MinigameController::class, 'activeRoundRanking']);
+    Route::get('minigames/{slug}/ranking/previous', [Controllers\MinigameController::class, 'previousRoundRanking']);
     
     
     // SCORES

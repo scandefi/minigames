@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Round;
 use App\Models\Score;
 use App\Models\Minigame;
 use Illuminate\Http\Request;
@@ -38,10 +39,14 @@ class ScoreController extends Controller
       $start_game = Carbon::createFromFormat('m/d/Y h:i:s A', $request->start_game)->toDateTimeString();
       $end_game = Carbon::createFromFormat('m/d/Y h:i:s A', $request->end_game)->toDateTimeString();
 
+      $round = $minigame->activeRound();
+
       $score = Score::create([
         'user_id' => $user->id,
         'minigame_id' => $minigame->id,
         'score' => $request->score,
+        'round_id' => $round->id,
+        'round_name' => $round->name,
         'wallet' => $wallet,
         'start_game' => $start_game,
         'end_game' => $end_game,

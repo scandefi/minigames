@@ -9,7 +9,7 @@ class Score extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'minigame_id', 'score', 'wallet', 'minigame_name', 'minigame_slug', 'meta'];
+    protected $fillable = ['user_id', 'minigame_id', 'score', 'round_id', 'round_name', 'wallet', 'minigame_name', 'minigame_slug', 'meta'];
 
     protected $casts = ['meta' => 'array'];
 
@@ -23,6 +23,11 @@ class Score extends Model
     public function minigame()
     {
         return $this->belongsTo(Minigame::class);
+    }
+    
+    public function round()
+    {
+        return $this->belongsTo(Round::class);
     }
 
     /* ATTRIBUTES */

@@ -16,10 +16,10 @@ class AddRoundColumnToScoresTable extends Migration
     {
         Schema::table('scores', function (Blueprint $table) {
             $table->foreignId('round_id')->after('score')->constrained('rounds');
-            $table->string('round')->after('round_id');
+            $table->string('round_name')->after('round_id');
         });
 
-        DB::table('scores')->where('round_id', NULL)->update(['round_id' => 1, 'round' => '1']);
+        DB::table('scores')->where('round_id', NULL)->update(['round_id' => 1, 'round_name' => '1']);
     }
 
     /**
@@ -31,7 +31,7 @@ class AddRoundColumnToScoresTable extends Migration
     {
         Schema::table('scores', function (Blueprint $table) {
             $table->dropColumn('round_id');
-            $table->dropColumn('round');
+            $table->dropColumn('round_name');
         });
     }
 }
