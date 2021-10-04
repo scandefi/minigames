@@ -29,6 +29,46 @@ class ScoreController extends Controller
       ]);
     }
 
+    public function roundHighscore($wallet, $slug, $round_id)
+    {
+      $user = User::whereWallet($wallet)->first();
+      $minigame = Minigame::whereSlug($slug)->first();
+      $round = $minigame->rounds()->find($round_id);
+
+      if(!$user || !$minigame || !$round) return response()->json(['success' => false, 'message' => 'Model not found']);
+
+      $highscore = Score::whereUserId($user->id)->whereMinigameId($minigame->id)->whereRoundId($round_id)->max('score');
+
+      return response()->json([
+        'success' => true,
+        'message' => 'User '.$wallet.' highscore for ' . $minigame->name . ' minigame Round ' . $round->name,
+        'user' => $wallet,
+        'minigame' => $slug,
+        'score' => $highscore ? $highscore : 0,
+        'round' => $round->name,
+      ]);
+    }
+
+    public function activeRoundHighscore($wallet, $slug)
+    {
+        $minigame = Minigame::whereSlug($slug)->first();
+        $round = $minigame->activeRound();
+
+        if(!$minigame || !$round) return response()->json(['success' => false, 'message' => 'Model not found']);
+
+        return $this->roundHighscore($wallet, $slug, $round->id);
+    }
+
+    public function previousRoundHighscore($wallet, $slug)
+    {
+        $minigame = Minigame::whereSlug($slug)->first();
+        $round = $minigame->previousRound();
+
+        if(!$minigame || !$round) return response()->json(['success' => false, 'message' => 'Model not found']);
+
+        return $this->roundHighscore($wallet, $slug, $round->id);
+    }
+
     public function store($wallet, $slug, Request $request)
     {
       $user = User::whereWallet($wallet)->first();

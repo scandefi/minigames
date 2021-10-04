@@ -86,15 +86,15 @@ class UserController extends Controller
       ]);
     }
 
-    public function roundRanking($wallet, $slug, $round_name)
+    public function roundRanking($wallet, $slug, $round_id)
     {
       $user = User::whereWallet($wallet)->first();
       $minigame = Minigame::whereSlug($slug)->first();
-      $round = $minigame->rounds()->whereName($round_name)->first();
+      $round = $minigame->rounds()->find($round_id);
 
       if(!$user || !$minigame || !$round) return response()->json(['success' => false, 'message' => 'Model not found']);
 
-      $ranking_total = Score::whereMinigameId($minigame->id)->whereRoundName($round_name)->orderBy('score', 'desc')->get()->groupBy('wallet');
+      $ranking_total = Score::whereMinigameId($minigame->id)->whereRoundId($round_id)->orderBy('score', 'desc')->get()->groupBy('wallet');
       
       $total = $ranking_total->count();
       $wallets = collect(array_keys($ranking_total->toArray()));
@@ -107,10 +107,10 @@ class UserController extends Controller
 
       return response()->json([
         'success' => true,
-        'message' => 'User ' . $wallet . ' ranking for ' . $minigame->name . ' minigame',
+        'message' => 'User ' . $wallet . ' ranking for ' . $minigame->name . ' minigame Round ' . $round->name,
         'user' => $wallet,
         'minigame' => $slug,
-        'round' => $round_name,
+        'round' => $round->name,
         'ranking' => $ranking,
         'score' => $ranking_total[$wallet][0]['score'],
         'total' => $total,
@@ -124,7 +124,7 @@ class UserController extends Controller
 
         if(!$minigame || !$round) return response()->json(['success' => false, 'message' => 'Model not found']);
 
-        return $this->roundRanking($wallet, $slug, $round->name);
+        return $this->roundRanking($wallet, $slug, $round->id);
     }
 
     public function previousRoundRanking($wallet, $slug)
@@ -134,6 +134,6 @@ class UserController extends Controller
 
         if(!$minigame || !$round) return response()->json(['success' => false, 'message' => 'Model not found']);
 
-        return $this->roundRanking($wallet, $slug, $round->name);
+        return $this->roundRanking($wallet, $slug, $round->id);
     }
 }

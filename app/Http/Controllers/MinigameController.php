@@ -55,14 +55,14 @@ class MinigameController extends Controller
       ]);
     }
 
-    public function roundRanking($slug, $round_name)
+    public function roundRanking($slug, $round_id)
     {
       $minigame = Minigame::whereSlug($slug)->first();
-      $round = $minigame->rounds()->whereName($round_name)->first();
+      $round = $minigame->rounds()->find($round_id);
       
       if(!$minigame || !$round) return response()->json(['success' => false, 'message' => 'Model not found']);
 
-      $ranking_total = Score::whereMinigameId($minigame->id)->whereRoundName($round_name)->orderBy('score', 'desc')->get()->groupBy('wallet')->take(30);
+      $ranking_total = Score::whereMinigameId($minigame->id)->whereRoundId($round_id)->orderBy('score', 'desc')->get()->groupBy('wallet')->take(30);
       
       $ranking = collect();
       $index = 1;
@@ -79,9 +79,9 @@ class MinigameController extends Controller
 
       return response()->json([
         'success' => true,
-        'message' => 'Ranking for ' . $minigame->name . ' minigame',
+        'message' => 'Ranking for ' . $minigame->name . ' minigame Round ' . $round->name,
         'mnigame' => $slug,
-        'round' => $round_name,
+        'round' => $round->name,
         'ranking' => $ranking,
       ]);
     }
@@ -93,7 +93,7 @@ class MinigameController extends Controller
 
         if(!$minigame || !$round) return response()->json(['success' => false, 'message' => 'Model not found']);
 
-        return $this->roundRanking($slug, $round->name);
+        return $this->roundRanking($slug, $round->id);
     }
 
     public function previousRoundRanking($slug)
@@ -103,7 +103,7 @@ class MinigameController extends Controller
 
         if(!$minigame || !$round) return response()->json(['success' => false, 'message' => 'Model not found']);
 
-        return $this->roundRanking($slug, $round->name);
+        return $this->roundRanking($slug, $round->id);
     }
 
     public function rounds($slug)
