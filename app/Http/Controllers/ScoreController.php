@@ -79,6 +79,7 @@ class ScoreController extends Controller
 
       $start_game = Carbon::createFromFormat('m/d/Y h:i:s A', $request->start_game)->toDateTimeString();
       $end_game = Carbon::createFromFormat('m/d/Y h:i:s A', $request->end_game)->toDateTimeString();
+      $duration = $end_game->diffForHumans($start_game, true, true, 6);
 
       $round = $minigame->activeRound();
 
@@ -91,6 +92,7 @@ class ScoreController extends Controller
         'wallet' => $wallet,
         'start_game' => $start_game,
         'end_game' => $end_game,
+        'duration' => $duration,
         'minigame_name' => $minigame->name,
         'minigame_slug' => $slug,
       ]);

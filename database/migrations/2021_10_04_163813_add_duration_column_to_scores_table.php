@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class AddRoundColumnToScoresTable extends Migration
+class AddDurationColumnToScoresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +14,7 @@ class AddRoundColumnToScoresTable extends Migration
     public function up()
     {
         Schema::table('scores', function (Blueprint $table) {
-            $table->foreignId('round_id')->nullable()->after('score')->constrained('rounds');
-            $table->string('round_name')->nullable()->after('round_id');
+            $table->string('duration')->nullable()->after('end_game');
         });
     }
 
@@ -28,8 +26,7 @@ class AddRoundColumnToScoresTable extends Migration
     public function down()
     {
         Schema::table('scores', function (Blueprint $table) {
-            $table->dropColumn('round_id');
-            $table->dropColumn('round_name');
+            $table->dropColumn('duration');
         });
     }
 }

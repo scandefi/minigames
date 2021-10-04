@@ -9,9 +9,9 @@ class Score extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'minigame_id', 'score', 'round_id', 'round_name', 'start_game', 'end_game', 'wallet', 'minigame_name', 'minigame_slug', 'meta'];
+    protected $fillable = ['user_id', 'minigame_id', 'score', 'round_id', 'round_name', 'start_game', 'end_game', 'duration', 'wallet', 'minigame_name', 'minigame_slug', 'meta'];
 
-    protected $casts = ['meta' => 'array'];
+    protected $casts = ['meta' => 'array', 'start_game' => 'datetime', 'end_game' => 'datetime'];
 
     /* RELALTIONS */
     
