@@ -79,11 +79,6 @@ class ScoreController extends Controller
 
       $start_game = Carbon::createFromFormat('m/d/Y h:i:s A', $request->start_game)->toDateTimeString();
       $end_game = Carbon::createFromFormat('m/d/Y h:i:s A', $request->end_game)->toDateTimeString();
-      // dd($request->start_game, $start_game);
-      app('log')->info('START_GAME R: '.$request->start_game);
-      app('log')->info('START_GAME C: '.$start_game);
-      app('log')->info('END_GAME R: '.$request->end_game);
-      app('log')->info('END_GAME C: '.$end_game);
 
       $round = $minigame->activeRound();
 
