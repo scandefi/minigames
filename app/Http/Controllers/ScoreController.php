@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Score;
 use App\Models\Minigame;
@@ -34,11 +35,16 @@ class ScoreController extends Controller
 
       if(!$user || !$minigame) return response()->json(['success' => false, 'message' => 'Model not found']);
 
+      $start_game = Carbon::createFromFormat('m/d/Y h:i:s A', $request->start_game)->toDateTimeString();
+      $end_game = Carbon::createFromFormat('m/d/Y h:i:s A', $request->end_game)->toDateTimeString();
+
       $score = Score::create([
         'user_id' => $user->id,
         'minigame_id' => $minigame->id,
         'score' => $request->score,
         'wallet' => $wallet,
+        'start_game' => $start_game,
+        'end_game' => $end_game,
         'minigame_name' => $minigame->name,
         'minigame_slug' => $slug,
       ]);
