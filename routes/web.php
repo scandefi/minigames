@@ -29,6 +29,8 @@ Route::group(['prefix' => 'api'], function(){
     Route::get('users/{wallet}/minigames/{slug}/lives', [Controllers\UserController::class, 'lives']);
     Route::get('users/{wallet}/minigames/{slug}/ranking', [Controllers\UserController::class, 'ranking']);
     Route::get('users/{wallet}/minigames/{slug}/round/{round_name}/ranking', [Controllers\UserController::class, 'roundRanking']);
+    Route::get('users/{wallet}/minigames/{slug}/ranking/active', [Controllers\UserController::class, 'activeRoundRanking']);
+    Route::get('users/{wallet}/minigames/{slug}/ranking/previous', [Controllers\UserController::class, 'previousRoundRanking']);
     
     
     // MINIGAMES

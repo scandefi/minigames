@@ -116,4 +116,24 @@ class UserController extends Controller
         'total' => $total,
       ]);
     }
+
+    public function activeRoundRanking($wallet, $slug)
+    {
+        $minigame = Minigame::whereSlug($slug)->first();
+        $round = $minigame->activeRound();
+
+        if(!$minigame || !$round) return response()->json(['success' => false, 'message' => 'Model not found']);
+
+        return $this->roundRanking($wallet, $slug, $round->name);
+    }
+
+    public function previousRoundRanking($wallet, $slug)
+    {
+        $minigame = Minigame::whereSlug($slug)->first();
+        $round = $minigame->previousRound();
+
+        if(!$minigame || !$round) return response()->json(['success' => false, 'message' => 'Model not found']);
+
+        return $this->roundRanking($wallet, $slug, $round->name);
+    }
 }
