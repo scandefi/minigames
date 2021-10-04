@@ -74,10 +74,12 @@ class ScoreController extends Controller
       $user = User::whereWallet($wallet)->first();
       $minigame = Minigame::whereSlug($slug)->first();
 
+
       if(!$user || !$minigame) return response()->json(['success' => false, 'message' => 'Model not found']);
 
       $start_game = Carbon::createFromFormat('m/d/Y h:i:s A', $request->start_game)->toDateTimeString();
       $end_game = Carbon::createFromFormat('m/d/Y h:i:s A', $request->end_game)->toDateTimeString();
+      dd($request->start_game, $start_game);
 
       $round = $minigame->activeRound();
 
