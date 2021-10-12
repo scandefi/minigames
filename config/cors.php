@@ -19,7 +19,13 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [config('app.url'), 'https://minigames.scandefi.test', 'https://scandefi.net', 'https://dev.scandefi.net', 'https://scandefi.test'],
+    'allowed_origins' => [
+        config('app.url'),
+        'https://minigames.scandefi.test',
+        'https://scandefi.net',
+        'https://dev.scandefi.net',
+        'https://scandefi.test'
+    ],
 
     'allowed_origins_patterns' => [],
 
@@ -29,6 +35,6 @@ return [
 
     'max_age' => 0,
 
-    'supports_credentials' => false,
+    'supports_credentials' => true,
 
 ];

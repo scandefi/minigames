@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Route::get('{minigame}', [Controllers\MinigameController::class, 'play']);
 
-Route::group(['prefix' => 'api'], function(){
+Route::group(['prefix' => 'api', 'middleware' => ['bot']], function(){
     // USERS
     Route::post('users/register', [Controllers\UserController::class, 'register']);
     Route::post('users/login-or-register', [Controllers\UserController::class, 'loginOrRegister']);

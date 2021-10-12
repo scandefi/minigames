@@ -20,14 +20,15 @@ class UserController extends Controller
     public function loginOrRegister(Request $request)
     {
       if(auth()->check()):
-        $authuser = auth()->user();
-        $authuser->update(['logged_in' => false]);
-        auth()->logout();
+        self::logout($request);
       endif;
       
       $user = User::whereWallet($request->wallet)->first();
 
       if(!$user) $user = User::create(['wallet' => $request->wallet, 'ip' => request()->ip()]);
+
+      // $user->tokens()->delete();
+      // $token = $user->createToken('minigames')->plainTextToken;
 
       auth()->login($user);
       $user->storeIp(request()->ip());
