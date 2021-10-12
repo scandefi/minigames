@@ -5,8 +5,8 @@
     <button class="button is-primary is-small" @click.prevent="logout">LOGOUT</button>
     <button class="button is-primary is-small" @click.prevent="complaints">COMPLAINTS</button>
     <button class="button is-primary is-small" @click.prevent="bot">DETECT BOT</button> -->
-    <div class="webgl-content" style="width:100vw;height:100vh;margin-top:40px;"></div>
-    <div id="unityContainer" style="width:100vw;height:100vh;margin-top:40px;"></div>
+    <div class="webgl-content" style="width:100vw;height:100vh;"></div>
+    <div id="unityContainer" style="width:100vw;height:100vh;"></div>
   </section>
 </template>
 
